@@ -33,12 +33,12 @@ Route::group([
 });
 
 Route::group([
-    'prefix' => 'invites'
+    'prefix' => 'friends'
 ], function () {
     Route::middleware('auth:api')->group(function () {
-        Route::post('send', 'FriendsInviteController@store')->name('send');
-        Route::post('accept', 'FriendsInviteController@accept')->name('api/accept');
-        Route::get('decline', 'FriendsInviteController@decline')->name('api/decline');
+        Route::post('send', 'FriendsInviteController@store');
+        Route::post('accept', 'FriendsInviteController@accept');
+        Route::get('decline', 'FriendsInviteController@decline');
     });
 
     Route::get('', 'FriendsInviteController@index');
