@@ -1,0 +1,458 @@
+openapi: 3.0.3
+info:
+    title: h_s_test
+    description: 'h_s_test auth and friends functionality API'
+    version: 1.0.0
+servers:
+    -
+        url: 'http://localhost'
+paths:
+    /auth/login:
+        post:
+            summary: 'Login user and create token'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - 'Authentication management'
+            requestBody:
+                required: false
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                    description: 'An email of the user.'
+                                    example: sed
+                                password:
+                                    type: string
+                                    description: 'The password of the user.'
+                                    example: facilis
+                                remember_me:
+                                    type: boolean
+                                    description: 'Remember me token.'
+                                    example: false
+            security: []
+    /auth/signup:
+        post:
+            summary: 'Create user'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - 'Authentication management'
+            requestBody:
+                required: false
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                    description: 'The name of the user.'
+                                    example: at
+                                email:
+                                    type: string
+                                    description: 'An email of the user.'
+                                    example: itaque
+                                password:
+                                    type: string
+                                    description: 'The password of the user.'
+                                    example: sint
+            security: []
+    /auth/logout:
+        get:
+            summary: 'Logout user (Revoke the token)'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                401:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    message: Unauthenticated.
+                                properties:
+                                    message: { type: string, example: Unauthenticated. }
+            tags:
+                - 'Authentication management'
+    /auth/user:
+        get:
+            summary: 'Get the authenticated User info'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                401:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    message: Unauthenticated.
+                                properties:
+                                    message: { type: string, example: Unauthenticated. }
+            tags:
+                - 'Authentication management'
+    /api/friends/send:
+        post:
+            summary: 'Create new friend'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - 'Friends and invites management'
+            requestBody:
+                required: false
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                friends_id:
+                                    type: integer
+                                    description: 'Id of the user friend request will be sent to.'
+                                    example: 1
+    /api/friends/accept:
+        post:
+            summary: 'Accept friend invite'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - 'Friends and invites management'
+            requestBody:
+                required: false
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                friends_id:
+                                    type: integer
+                                    description: 'Id of the user friend request was sent from.'
+                                    example: 2
+    /api/friends/decline:
+        get:
+            summary: 'Decline friend invite'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                401:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    message: Unauthenticated.
+                                properties:
+                                    message: { type: string, example: Unauthenticated. }
+            tags:
+                - 'Friends and invites management'
+            requestBody:
+                required: false
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                friends_id:
+                                    type: integer
+                                    description: 'Id of the user friend request was sent from.'
+                                    example: 2
+    /api/friends:
+        get:
+            summary: 'Show all relations'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                example:
+                                    - { id: 1, user_id: 1, friends_id: 2, accepted: 0, created_at: '2020-11-01T23:24:09.000000Z', updated_at: '2020-11-01T23:43:56.000000Z' }
+                                    - { id: 2, user_id: 1, friends_id: 3, accepted: 0, created_at: '2020-11-01T23:24:20.000000Z', updated_at: '2020-11-01T23:24:20.000000Z' }
+                                    - { id: 3, user_id: 2, friends_id: 7, accepted: 0, created_at: '2020-11-02T01:27:43.000000Z', updated_at: '2020-11-02T01:27:43.000000Z' }
+                                    - { id: 4, user_id: 2, friends_id: 8, accepted: 0, created_at: '2020-11-02T01:27:47.000000Z', updated_at: '2020-11-02T01:27:47.000000Z' }
+                                    - { id: 10, user_id: 2, friends_id: 1, accepted: 0, created_at: '2020-11-02T02:26:02.000000Z', updated_at: '2020-11-02T02:26:02.000000Z' }
+            tags:
+                - 'Friends and invites management'
+            security: []
+    '/api/friends/{id}':
+        get:
+            summary: 'Show friend record'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                example:
+                                    - { id: 1, user_id: 1, friends_id: 2, accepted: 0, created_at: '2020-11-01T23:24:09.000000Z', updated_at: '2020-11-01T23:43:56.000000Z' }
+            tags:
+                - 'Friends and invites management'
+            security: []
+        put:
+            summary: 'Update friend record'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - 'Friends and invites management'
+            requestBody:
+                required: false
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                user_id:
+                                    type: integer
+                                    description: 'Id of the user friend request was sent from.'
+                                    example: 1
+                                friends_id:
+                                    type: integer
+                                    description: 'Id of the user friend request was sent to.'
+                                    example: 2
+                                accepted:
+                                    type: boolean
+                                    description: 'Status of the friend request.'
+                                    example: false
+            security: []
+        delete:
+            summary: 'Delete friend record'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - 'Friends and invites management'
+            security: []
+        parameters:
+            -
+                in: path
+                name: id
+                description: 'Optional parameter. Id of the record to show.'
+                required: true
+                schema:
+                    type: integer
+                examples:
+                    omitted:
+                        summary: 'When the value is omitted'
+                        value: ''
+                    present:
+                        summary: 'When the value is present'
+                        value: 1
+components:
+    securitySchemes:
+        default:
+            type: http
+            scheme: bearer
+            description: ''
+security:
+    -
+        default: []

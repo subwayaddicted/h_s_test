@@ -8,10 +8,21 @@ use Carbon\Carbon;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Class AuthController
+ *
+ * @group Authentication management
+ *
+ * @package App\Http\Controllers
+ */
 class AuthController extends Controller
 {
     /**
      * Create user
+     *
+     * @bodyParam name string The name of the user.
+     * @bodyParam email string An email of the user.
+     * @bodyParam password string The password of the user.
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse [string] message
@@ -36,6 +47,10 @@ class AuthController extends Controller
 
     /**
      * Login user and create token
+     *
+     * @bodyParam name string An email of the user.
+     * @bodyParam password string The password of the user.
+     * @bodyParam remember_me boolean Remember me token. Example: false
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse [string] access_token
@@ -70,6 +85,8 @@ class AuthController extends Controller
     /**
      * Logout user (Revoke the token)
      *
+     * @authenticated
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse [string] message
      */
@@ -84,7 +101,9 @@ class AuthController extends Controller
     }
 
     /**
-     * Get the authenticated User
+     * Get the authenticated User info
+     *
+     * @authenticated
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse [json] user object

@@ -4,15 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Friends;
 use Illuminate\Http\Request;
-use App\User;
-use App\Invite;
-use App\Mail\FriendInviteCreated;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
 
 /**
  * Class InviteController
+ *
+ * @group Friends and invites management
+ *
  * @package App\Http\Controllers
  */
 class FriendsInviteController extends Controller
@@ -32,6 +29,9 @@ class FriendsInviteController extends Controller
     /**
      * Create new friend
      *
+     * @authenticated
+     * @bodyParam friends_id int Id of the user friend request will be sent to. Example: 1
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -39,7 +39,7 @@ class FriendsInviteController extends Controller
     {
         Friends::updateOrCreate([
             'user_id' => $request->user()->id,
-            'friends_id' => $request->friend_id,
+            'friends_id' => $request->friends_id,
             'accepted' => false
         ]);
 
@@ -48,6 +48,8 @@ class FriendsInviteController extends Controller
 
     /**
      * Show friend record
+     *
+     * @urlParam id int Id of the record to show. Example: 1
      *
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
@@ -61,6 +63,11 @@ class FriendsInviteController extends Controller
 
     /**
      * Update friend record
+     *
+     * @urlParam id int Id of the record to update. Example: 1
+     * @bodyParam user_id int Id of the user friend request was sent from. Example: 1
+     * @bodyParam friends_id int Id of the user friend request was sent to. Example: 2
+     * @bodyParam accepted boolean Status of the friend request. Example: false
      *
      * @param Request $request
      * @param int $id
@@ -82,6 +89,8 @@ class FriendsInviteController extends Controller
     /**
      * Delete friend record
      *
+     * @urlParam id int Id of the record to delete. Example: 1
+     *
      * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -95,6 +104,9 @@ class FriendsInviteController extends Controller
 
     /**
      * Accept friend invite
+     *
+     * @authenticated
+     * @bodyParam friends_id int Id of the user friend request was sent from. Example: 2
      *
      * @param Request $request
      * @return string
@@ -113,6 +125,9 @@ class FriendsInviteController extends Controller
 
     /**
      * Decline friend invite
+     *
+     * @authenticated
+     * @bodyParam friends_id int Id of the user friend request was sent from. Example: 2
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse

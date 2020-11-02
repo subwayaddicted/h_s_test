@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>h_s_test Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/style.css" media="screen" />
+        <link rel="stylesheet" href="css/print.css" media="print" />
+        <script src="js/all.js"></script>
+
+        <link rel="stylesheet" href="css/highlight-darcula.css" media="" />
+        <script src="js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+<body class="" data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+<a href="#" id="nav-button">
+      <span>
+        NAV
+            <img src="images/navbar.png" alt="-image" class=""/>
+      </span>
+</a>
+<div class="tocify-wrapper">
+                <div class="lang-selector">
+                            <a href="#" data-language-name="bash">bash</a>
+                            <a href="#" data-language-name="javascript">javascript</a>
+                    </div>
+        <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+    <ul class="search-results"></ul>
+
+    <ul id="toc">
+    </ul>
+
+            <ul class="toc-footer" id="toc-footer">
+                            <li><a href="./collection.json">View Postman collection</a></li>
+                            <li><a href="./openapi.yaml">View OpenAPI (Swagger) spec</a></li>
+                            <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
+                    </ul>
+            <ul class="toc-footer" id="last-updated">
+            <li>Last updated: November 2 2020</li>
+        </ul>
+</div>
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1>Introduction</h1>
+<p>h_s_test auth and friends functionality API</p>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+<script>
+    var baseUrl = "http://localhost";
+</script>
+<script src="js/tryitout.js"></script>
+<blockquote>
+<p>Base URL</p>
+</blockquote>
+<pre><code class="language-yaml">http://localhost</code></pre><h1>Authenticating requests</h1>
+<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.\n\nAll authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
+<p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p><h1>Authentication management</h1>
+<h2>Login user and create token</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/auth/login" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"sed","password":"facilis","remember_me":false}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/auth/login"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "sed",
+    "password": "facilis",
+    "remember_me": false
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<div id="execution-results-POSTauth-login" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTauth-login"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTauth-login"></code></pre>
+</div>
+<div id="execution-error-POSTauth-login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTauth-login"></code></pre>
+</div>
+<form id="form-POSTauth-login" data-method="POST" data-path="auth/login" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTauth-login', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTauth-login" onclick="tryItOut('POSTauth-login');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTauth-login" onclick="cancelTryOut('POSTauth-login');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTauth-login" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>auth/login</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>name</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="name" data-endpoint="POSTauth-login" data-component="body"  hidden>
+<br>
+An email of the user.</p>
+<p>
+<b><code>password</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="password" data-endpoint="POSTauth-login" data-component="body"  hidden>
+<br>
+The password of the user.</p>
+<p>
+<b><code>remember_me</code></b>&nbsp;&nbsp;<small>boolean</small>     <i>optional</i> &nbsp;
+<label data-endpoint="POSTauth-login" hidden><input type="radio" name="remember_me" value="true" data-endpoint="POSTauth-login" data-component="body" ><code>true</code></label>
+<label data-endpoint="POSTauth-login" hidden><input type="radio" name="remember_me" value="false" data-endpoint="POSTauth-login" data-component="body" ><code>false</code></label>
+<br>
+Remember me token.</p>
+
+</form>
+<h2>Create user</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/auth/signup" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"at","email":"itaque","password":"sint"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/auth/signup"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "at",
+    "email": "itaque",
+    "password": "sint"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<div id="execution-results-POSTauth-signup" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTauth-signup"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTauth-signup"></code></pre>
+</div>
+<div id="execution-error-POSTauth-signup" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTauth-signup"></code></pre>
+</div>
+<form id="form-POSTauth-signup" data-method="POST" data-path="auth/signup" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTauth-signup', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTauth-signup" onclick="tryItOut('POSTauth-signup');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTauth-signup" onclick="cancelTryOut('POSTauth-signup');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTauth-signup" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>auth/signup</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>name</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="name" data-endpoint="POSTauth-signup" data-component="body"  hidden>
+<br>
+The name of the user.</p>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="email" data-endpoint="POSTauth-signup" data-component="body"  hidden>
+<br>
+An email of the user.</p>
+<p>
+<b><code>password</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="password" data-endpoint="POSTauth-signup" data-component="body"  hidden>
+<br>
+The password of the user.</p>
+
+</form>
+<h2>Logout user (Revoke the token)</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/auth/logout" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/auth/logout"
+);
+
+let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<div id="execution-results-GETauth-logout" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETauth-logout"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETauth-logout"></code></pre>
+</div>
+<div id="execution-error-GETauth-logout" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETauth-logout"></code></pre>
+</div>
+<form id="form-GETauth-logout" data-method="GET" data-path="auth/logout" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETauth-logout', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETauth-logout" onclick="tryItOut('GETauth-logout');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETauth-logout" onclick="cancelTryOut('GETauth-logout');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETauth-logout" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>auth/logout</code></b>
+</p>
+<p>
+<label id="auth-GETauth-logout" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETauth-logout" data-component="header"></label>
+</p>
+</form>
+<h2>Get the authenticated User info</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/auth/user" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/auth/user"
+);
+
+let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<div id="execution-results-GETauth-user" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETauth-user"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETauth-user"></code></pre>
+</div>
+<div id="execution-error-GETauth-user" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETauth-user"></code></pre>
+</div>
+<form id="form-GETauth-user" data-method="GET" data-path="auth/user" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETauth-user', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETauth-user" onclick="tryItOut('GETauth-user');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETauth-user" onclick="cancelTryOut('GETauth-user');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETauth-user" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>auth/user</code></b>
+</p>
+<p>
+<label id="auth-GETauth-user" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETauth-user" data-component="header"></label>
+</p>
+</form><h1>Friends and invites management</h1>
+<h2>Create new friend</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/friends/send" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"friends_id":1}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/friends/send"
+);
+
+let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "friends_id": 1
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<div id="execution-results-POSTapi-friends-send" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-friends-send"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-friends-send"></code></pre>
+</div>
+<div id="execution-error-POSTapi-friends-send" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-friends-send"></code></pre>
+</div>
+<form id="form-POSTapi-friends-send" data-method="POST" data-path="api/friends/send" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-friends-send', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-friends-send" onclick="tryItOut('POSTapi-friends-send');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-friends-send" onclick="cancelTryOut('POSTapi-friends-send');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-friends-send" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/friends/send</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-friends-send" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-friends-send" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>friends_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="friends_id" data-endpoint="POSTapi-friends-send" data-component="body"  hidden>
+<br>
+Id of the user friend request will be sent to.</p>
+
+</form>
+<h2>Accept friend invite</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/friends/accept" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"friends_id":2}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/friends/accept"
+);
+
+let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "friends_id": 2
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<div id="execution-results-POSTapi-friends-accept" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-friends-accept"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-friends-accept"></code></pre>
+</div>
+<div id="execution-error-POSTapi-friends-accept" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-friends-accept"></code></pre>
+</div>
+<form id="form-POSTapi-friends-accept" data-method="POST" data-path="api/friends/accept" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-friends-accept', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-friends-accept" onclick="tryItOut('POSTapi-friends-accept');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-friends-accept" onclick="cancelTryOut('POSTapi-friends-accept');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-friends-accept" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/friends/accept</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-friends-accept" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-friends-accept" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>friends_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="friends_id" data-endpoint="POSTapi-friends-accept" data-component="body"  hidden>
+<br>
+Id of the user friend request was sent from.</p>
+
+</form>
+<h2>Decline friend invite</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/friends/decline" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"friends_id":2}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/friends/decline"
+);
+
+let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "friends_id": 2
+}
+
+fetch(url, {
+    method: "GET",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<div id="execution-results-GETapi-friends-decline" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-friends-decline"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-friends-decline"></code></pre>
+</div>
+<div id="execution-error-GETapi-friends-decline" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-friends-decline"></code></pre>
+</div>
+<form id="form-GETapi-friends-decline" data-method="GET" data-path="api/friends/decline" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-friends-decline', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-friends-decline" onclick="tryItOut('GETapi-friends-decline');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-friends-decline" onclick="cancelTryOut('GETapi-friends-decline');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-friends-decline" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/friends/decline</code></b>
+</p>
+<p>
+<label id="auth-GETapi-friends-decline" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-friends-decline" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>friends_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="friends_id" data-endpoint="GETapi-friends-decline" data-component="body"  hidden>
+<br>
+Id of the user friend request was sent from.</p>
+
+</form>
+<h2>Show all relations</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/friends" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/friends"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">[
+    {
+        "id": 1,
+        "user_id": 1,
+        "friends_id": 2,
+        "accepted": 0,
+        "created_at": "2020-11-01T23:24:09.000000Z",
+        "updated_at": "2020-11-01T23:43:56.000000Z"
+    },
+    {
+        "id": 2,
+        "user_id": 1,
+        "friends_id": 3,
+        "accepted": 0,
+        "created_at": "2020-11-01T23:24:20.000000Z",
+        "updated_at": "2020-11-01T23:24:20.000000Z"
+    },
+    {
+        "id": 3,
+        "user_id": 2,
+        "friends_id": 7,
+        "accepted": 0,
+        "created_at": "2020-11-02T01:27:43.000000Z",
+        "updated_at": "2020-11-02T01:27:43.000000Z"
+    },
+    {
+        "id": 4,
+        "user_id": 2,
+        "friends_id": 8,
+        "accepted": 0,
+        "created_at": "2020-11-02T01:27:47.000000Z",
+        "updated_at": "2020-11-02T01:27:47.000000Z"
+    },
+    {
+        "id": 10,
+        "user_id": 2,
+        "friends_id": 1,
+        "accepted": 0,
+        "created_at": "2020-11-02T02:26:02.000000Z",
+        "updated_at": "2020-11-02T02:26:02.000000Z"
+    }
+]</code></pre>
+<div id="execution-results-GETapi-friends" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-friends"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-friends"></code></pre>
+</div>
+<div id="execution-error-GETapi-friends" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-friends"></code></pre>
+</div>
+<form id="form-GETapi-friends" data-method="GET" data-path="api/friends" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-friends', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-friends" onclick="tryItOut('GETapi-friends');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-friends" onclick="cancelTryOut('GETapi-friends');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-friends" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/friends</code></b>
+</p>
+</form>
+<h2>Show friend record</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/friends/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/friends/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">[
+    {
+        "id": 1,
+        "user_id": 1,
+        "friends_id": 2,
+        "accepted": 0,
+        "created_at": "2020-11-01T23:24:09.000000Z",
+        "updated_at": "2020-11-01T23:43:56.000000Z"
+    }
+]</code></pre>
+<div id="execution-results-GETapi-friends--id-" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-friends--id-"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-friends--id-"></code></pre>
+</div>
+<div id="execution-error-GETapi-friends--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-friends--id-"></code></pre>
+</div>
+<form id="form-GETapi-friends--id-" data-method="GET" data-path="api/friends/{id}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-friends--id-', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-friends--id-" onclick="tryItOut('GETapi-friends--id-');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-friends--id-" onclick="cancelTryOut('GETapi-friends--id-');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-friends--id-" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/friends/{id}</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="id" data-endpoint="GETapi-friends--id-" data-component="url"  hidden>
+<br>
+Id of the record to show.</p>
+</form>
+<h2>Update friend record</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT \
+    "http://localhost/api/friends/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"user_id":1,"friends_id":2,"accepted":false}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/friends/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "user_id": 1,
+    "friends_id": 2,
+    "accepted": false
+}
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<div id="execution-results-PUTapi-friends--id-" hidden>
+    <blockquote>Received response<span id="execution-response-status-PUTapi-friends--id-"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-friends--id-"></code></pre>
+</div>
+<div id="execution-error-PUTapi-friends--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-friends--id-"></code></pre>
+</div>
+<form id="form-PUTapi-friends--id-" data-method="PUT" data-path="api/friends/{id}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-friends--id-', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-PUTapi-friends--id-" onclick="tryItOut('PUTapi-friends--id-');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-PUTapi-friends--id-" onclick="cancelTryOut('PUTapi-friends--id-');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-PUTapi-friends--id-" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-darkblue">PUT</small>
+ <b><code>api/friends/{id}</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="id" data-endpoint="PUTapi-friends--id-" data-component="url"  hidden>
+<br>
+Id of the record to update.</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>user_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="user_id" data-endpoint="PUTapi-friends--id-" data-component="body"  hidden>
+<br>
+Id of the user friend request was sent from.</p>
+<p>
+<b><code>friends_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="friends_id" data-endpoint="PUTapi-friends--id-" data-component="body"  hidden>
+<br>
+Id of the user friend request was sent to.</p>
+<p>
+<b><code>accepted</code></b>&nbsp;&nbsp;<small>boolean</small>     <i>optional</i> &nbsp;
+<label data-endpoint="PUTapi-friends--id-" hidden><input type="radio" name="accepted" value="true" data-endpoint="PUTapi-friends--id-" data-component="body" ><code>true</code></label>
+<label data-endpoint="PUTapi-friends--id-" hidden><input type="radio" name="accepted" value="false" data-endpoint="PUTapi-friends--id-" data-component="body" ><code>false</code></label>
+<br>
+Status of the friend request.</p>
+
+</form>
+<h2>Delete friend record</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "http://localhost/api/friends/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/friends/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<div id="execution-results-DELETEapi-friends--id-" hidden>
+    <blockquote>Received response<span id="execution-response-status-DELETEapi-friends--id-"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-friends--id-"></code></pre>
+</div>
+<div id="execution-error-DELETEapi-friends--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-friends--id-"></code></pre>
+</div>
+<form id="form-DELETEapi-friends--id-" data-method="DELETE" data-path="api/friends/{id}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-friends--id-', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-DELETEapi-friends--id-" onclick="tryItOut('DELETEapi-friends--id-');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-DELETEapi-friends--id-" onclick="cancelTryOut('DELETEapi-friends--id-');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-DELETEapi-friends--id-" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-red">DELETE</small>
+ <b><code>api/friends/{id}</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="id" data-endpoint="DELETEapi-friends--id-" data-component="url"  hidden>
+<br>
+Id of the record to delete.</p>
+</form>
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                    <a href="#" data-language-name="bash">bash</a>
+                                    <a href="#" data-language-name="javascript">javascript</a>
+                            </div>
+            </div>
+</div>
+<script>
+    $(function () {
+        var languages = ["bash","javascript"];
+        setupLanguages(languages);
+    });
+</script>
+</body>
+</html>
