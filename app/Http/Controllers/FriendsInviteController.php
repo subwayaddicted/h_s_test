@@ -30,15 +30,15 @@ class FriendsInviteController extends Controller
     }
 
     /**
-     * Create new invite
+     * Create new friend
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        $friend_invite = Friends::create([
-            'user_id' => $request->user(),
+        Friends::updateOrCreate([
+            'user_id' => $request->user()->id,
             'friends_id' => $request->friend_id,
             'accepted' => false
         ]);
@@ -47,7 +47,7 @@ class FriendsInviteController extends Controller
     }
 
     /**
-     * Show friend invite
+     * Show friend record
      *
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
@@ -60,18 +60,18 @@ class FriendsInviteController extends Controller
     }
 
     /**
-     * Update friend invite
+     * Update friend record
      *
      * @param Request $request
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, int $id)
+    public function update(int $id, Request $request)
     {
         $friend_invite = Friends::findOrFail($id);
 
         $friend_invite->user_id = $request->user_id;
-        $friend_invite->friend_id = $request->friend_id;
+        $friend_invite->friends_id = $request->friends_id;
         $friend_invite->accepted = $request->accepted;
 
         $friend_invite->save();
@@ -80,6 +80,8 @@ class FriendsInviteController extends Controller
     }
 
     /**
+     * Delete friend record
+     *
      * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -92,12 +94,17 @@ class FriendsInviteController extends Controller
     }
 
     /**
+     * Accept friend invite
+     *
      * @param Request $request
      * @return string
      */
     public function accept(Request $request)
     {
-        $friends_invite = Friends::findOrFail($request->id);
+        $friends_invite = Friends::where([
+            'user_id' => $request->user()->id,
+            'friends_id' => $request->friends_id
+        ]);
         $friends_invite->accepted = true;
         $friends_invite->save();
 
@@ -105,12 +112,17 @@ class FriendsInviteController extends Controller
     }
 
     /**
+     * Decline friend invite
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function decline(Request $request)
     {
-        $friends_invite = Friends::findOrFail($request->id);
+        $friends_invite = Friends::where([
+            'user_id' => $request->user()->id,
+            'friends_id' => $request->friends_id
+        ]);
         $friends_invite->delete();
 
         return response()->json(['message' => 'Invite declined'], 200);
