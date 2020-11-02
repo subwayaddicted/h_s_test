@@ -20,6 +20,9 @@ Available at `localhost:8000/docs`
 
 There are options for export into OpenAPI or Postman formats
 
+### Generate documentation
+`docker-compose exec app php artisan scribe:generate`
+
 ## docker-compose
 ### With provided data
 
