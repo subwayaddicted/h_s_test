@@ -38,8 +38,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    function friends()
+    public function friends()
     {
-        return $this->belongsToMany('User', 'user_friend', 'user_id', 'friend_id');
+        return $this->belongsToMany(User::class, 'user_friend', 'user_id', 'friends_id');
     }
 }
