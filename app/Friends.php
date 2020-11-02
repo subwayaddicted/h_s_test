@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Friends extends Model
 {
-    protected $table = 'user_friends';
+    /**
+     * @var string
+     */
+    protected $table = 'user_friend';
+
+    /**
+     * @var string[]
+     */
+    protected $fillable = ['user_id', 'friends_id', 'accepted'];
 }
