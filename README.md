@@ -13,6 +13,8 @@ Enter the folder with project
 
 `docker-compose exec app php artisan key:generate`
 
+`docker-compose exec app php artisan passport:install`
+
 ### Test data
 DB data and tables are provided via docker-compose/mysql/init_db.sql file
 Test users passwords: `testtest`
