@@ -7,6 +7,8 @@ Enter the folder with project
 
 `cp .env.example .env`
 
+`composer install`
+
 ### Test data
 DB data and tables are provided via docker-compose/mysql/init_db.sql file
 Test users passwords: `testtest`
