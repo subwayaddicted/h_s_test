@@ -135,8 +135,8 @@ class FriendsInviteController extends Controller
     public function decline(Request $request)
     {
         $friends_invite = Friends::where([
-            'user_id' => $request->user()->id,
-            'friends_id' => $request->friends_id
+            'user_id' => $request->friends_id,
+            'friends_id' => $request->user()->id
         ]);
         $friends_invite->delete();
 
