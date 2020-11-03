@@ -116,7 +116,7 @@ class FriendsInviteController extends Controller
         $friends_invite = Friends::where([
             'user_id' => $request->friends_id,
             'friends_id' => $request->user()->id
-        ]);
+        ])->first();
         $friends_invite->accepted = true;
         $friends_invite->save();
 
@@ -137,7 +137,7 @@ class FriendsInviteController extends Controller
         $friends_invite = Friends::where([
             'user_id' => $request->friends_id,
             'friends_id' => $request->user()->id
-        ]);
+        ])->first();
         $friends_invite->delete();
 
         return response()->json(['message' => 'Invite declined'], 200);
