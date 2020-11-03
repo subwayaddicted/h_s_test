@@ -43,7 +43,7 @@ class FriendsInviteController extends Controller
             'accepted' => false
         ]);
 
-        return response()->json(['Invite sent to ' . $request->friend_id], 201);
+        return response()->json(['Invite sent to ' . $request->friends_id], 201);
     }
 
     /**
