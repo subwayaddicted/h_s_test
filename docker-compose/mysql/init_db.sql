@@ -152,16 +152,6 @@ CREATE TABLE `oauth_clients` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `oauth_clients`
---
-
-LOCK TABLES `oauth_clients` WRITE;
-/*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
-INSERT INTO `oauth_clients` VALUES (1,NULL,'Laravel Personal Access Client','iFGYd2z8ceXGM1flJVgVbhQrkVmNtF9UO6EtSRxy',NULL,'http://localhost',1,0,0,'2020-11-01 23:00:38','2020-11-01 23:00:38'),(2,NULL,'Laravel Password Grant Client','yXvcmMTepx57eBQEsi2lNJra2ZEWKxJlC8yxOx9J','users','http://localhost',0,1,0,'2020-11-01 23:00:38','2020-11-01 23:00:38');
-/*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `oauth_personal_access_clients`
 --
 
