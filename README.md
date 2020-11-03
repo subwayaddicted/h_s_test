@@ -9,6 +9,10 @@ Enter the folder with project
 
 `composer install`
 
+`docker-compose up -d`
+
+`docker-compose exec app php artisan key:generate`
+
 ### Test data
 DB data and tables are provided via docker-compose/mysql/init_db.sql file
 Test users passwords: `testtest`
